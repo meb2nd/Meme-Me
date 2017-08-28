@@ -109,6 +109,16 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                     self.dismiss(animated: true, completion: nil)
                 } else {
                     
+                    let controller = UIAlertController()
+                    controller.title = "Meme Share Incomplete"
+                    controller.message = "Share was either cancelled or failed."
+                    
+                    let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { action in self.dismiss(animated: true, completion: nil)
+                    }
+                    
+                    controller.addAction(okAction)
+                    self.present(controller, animated: true, completion: nil)
+                    
                 }
             }
             
