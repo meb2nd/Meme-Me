@@ -94,6 +94,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         present(imagePicker, animated: true, completion: nil)
     }
     
+    // Code for the completionWithItemsHandler in the following method is based upon information found at the following URL
+    // http://seanwernimont.weebly.com/blog/december-02nd-2015
+    
     @IBAction func shareMeme() {
         
         self.memedImage = generateMemedImage()
