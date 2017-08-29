@@ -50,10 +50,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         textField.delegate = self
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -101,7 +97,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let controller = self.storyboard?.instantiateViewController(withIdentifier: "FontPickerViewController") as! FontPickerViewController
         
         
-        self.present(controller, animated: true, completion: nil)
+        present(controller, animated: true, completion: nil)
         
     }
     
@@ -110,8 +106,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     @IBAction func shareMeme() {
         
-        self.memedImage = generateMemedImage()
-        if let image = self.memedImage {
+        memedImage = generateMemedImage()
+        if let image = memedImage {
             
             let controller = UIActivityViewController(activityItems: [image], applicationActivities: nil)
             
@@ -136,7 +132,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                 }
             }
             
-            self.present(controller, animated: true, completion: nil)
+            present(controller, animated: true, completion: nil)
         }
         
     }
@@ -200,26 +196,27 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // MARK:  Helper methods for keyboard handling
     
     func keyboardWillShow(_ notification:Notification) {
-        
-        // Only move the view when editing the bottom text
-        if bottomTextField.isFirstResponder {
-            view.frame.origin.y = 0 - getKeyboardHeight(notification)
-        }
+
+        view.frame.origin.y = 0 - getKeyboardHeight(notification)
     }
     
     func keyboardWillHide(_ notification:Notification) {
         
-        // Only move the view when editing the bottom text
-        if bottomTextField.isFirstResponder {
-            view.frame.origin.y = 0
-        }
+        view.frame.origin.y = 0
     }
     
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
         
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
-        return keyboardSize.cgRectValue.height
+        
+        // Only move the view when editing the bottom text
+        if bottomTextField.isFirstResponder {
+            return keyboardSize.cgRectValue.height
+        } else {
+            return 0
+        }
+        
     }
     
     func subscribeToKeyboardNotifications() {

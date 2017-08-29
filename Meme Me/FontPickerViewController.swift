@@ -83,7 +83,7 @@ class FontPickerViewController: UIViewController, UIPickerViewDataSource, UIPick
 
     
     @IBAction func dismiss(_ sender: Any) {
-        // dismiss this view controller
+        // Dismiss this view controller
         self.dismiss(animated: true, completion: nil)
     }
 
