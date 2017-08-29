@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		125D342C1F54BB3900B9A88E /* FontPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125D342B1F54BB3900B9A88E /* FontPickerViewController.swift */; };
+		125D342E1F54F52900B9A88E /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 125D342D1F54F52900B9A88E /* Fonts */; };
 		12A0651E1F52078A006B27E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A0651D1F52078A006B27E7 /* AppDelegate.swift */; };
 		12A065201F52078A006B27E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A0651F1F52078A006B27E7 /* ViewController.swift */; };
 		12A065231F52078A006B27E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12A065211F52078A006B27E7 /* Main.storyboard */; };
@@ -16,6 +18,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		125D342B1F54BB3900B9A88E /* FontPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FontPickerViewController.swift; path = ../FontPickerViewController.swift; sourceTree = "<group>"; };
+		125D342D1F54F52900B9A88E /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
+		125D342F1F54FB6400B9A88E /* Arial Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Arial Black.ttf"; path = "Meme Me/Fonts/Arial Black.ttf"; sourceTree = "<group>"; };
+		125D34301F54FB6400B9A88E /* Impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Impact.ttf; path = "Meme Me/Fonts/Impact.ttf"; sourceTree = "<group>"; };
 		12A0651A1F52078A006B27E7 /* Meme Me.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Meme Me.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		12A0651D1F52078A006B27E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		12A0651F1F52078A006B27E7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -40,6 +46,8 @@
 		12A065111F52078A006B27E7 = {
 			isa = PBXGroup;
 			children = (
+				125D342F1F54FB6400B9A88E /* Arial Black.ttf */,
+				125D34301F54FB6400B9A88E /* Impact.ttf */,
 				12A0651C1F52078A006B27E7 /* Meme Me */,
 				12A0651B1F52078A006B27E7 /* Products */,
 			);
@@ -56,6 +64,7 @@
 		12A0651C1F52078A006B27E7 /* Meme Me */ = {
 			isa = PBXGroup;
 			children = (
+				125D342B1F54BB3900B9A88E /* FontPickerViewController.swift */,
 				12A0651D1F52078A006B27E7 /* AppDelegate.swift */,
 				12A0651F1F52078A006B27E7 /* ViewController.swift */,
 				12A065211F52078A006B27E7 /* Main.storyboard */,
@@ -63,6 +72,7 @@
 				12A065241F52078A006B27E7 /* Assets.xcassets */,
 				12A065261F52078A006B27E7 /* LaunchScreen.storyboard */,
 				12A065291F52078A006B27E7 /* Info.plist */,
+				125D342D1F54F52900B9A88E /* Fonts */,
 			);
 			path = "Meme Me";
 			sourceTree = "<group>";
@@ -130,6 +140,7 @@
 				12A065281F52078A006B27E7 /* LaunchScreen.storyboard in Resources */,
 				12A065251F52078A006B27E7 /* Assets.xcassets in Resources */,
 				12A065231F52078A006B27E7 /* Main.storyboard in Resources */,
+				125D342E1F54F52900B9A88E /* Fonts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12A065301F527BA6006B27E7 /* Meme.swift in Sources */,
+				125D342C1F54BB3900B9A88E /* FontPickerViewController.swift in Sources */,
 				12A065201F52078A006B27E7 /* ViewController.swift in Sources */,
 				12A0651E1F52078A006B27E7 /* AppDelegate.swift in Sources */,
 			);

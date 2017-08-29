@@ -28,6 +28,11 @@
 	<string>Select image for meme.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Take photo for meme.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Fonts/Impact.ttf</string>
+		<string>Fonts/Arial Black.ttf</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

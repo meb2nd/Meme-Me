@@ -23,17 +23,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="c9k-sa-bIa">
-                                <rect key="frame" x="0.0" y="0.0" width="666" height="372"/>
+                                <rect key="frame" x="0.0" y="0.0" width="666" height="328"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xmi-k3-SWh">
-                                        <rect key="frame" x="0.0" y="0.0" width="666" height="372"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="666" height="328"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     </imageView>
                                 </subviews>
                             </stackView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PTT-aX-af7">
-                                <rect key="frame" x="0.0" y="331" width="667" height="44"/>
+                                <rect key="frame" x="0.0" y="287" width="667" height="44"/>
                                 <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="POk-cE-V1m"/>
+                                    <barButtonItem title="Font" id="xTw-O3-VwH">
+                                        <connections>
+                                            <action selector="chooseFont:" destination="BYZ-38-t0r" id="QJ1-W2-Ihz"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="7te-hA-xah"/>
                                     <barButtonItem systemItem="camera" id="s22-Uk-YyS">
                                         <connections>
@@ -74,7 +80,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r8g-8A-hTQ">
-                                <rect key="frame" x="40" y="294" width="587" height="17"/>
+                                <rect key="frame" x="40" y="250" width="587" height="17"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -101,6 +107,8 @@
                             <constraint firstItem="r8g-8A-hTQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="yL9-rX-YOW"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="bottomTextField" destination="r8g-8A-hTQ" id="kXP-VV-lGW"/>
                         <outlet property="cameraButton" destination="s22-Uk-YyS" id="8B6-s3-XS4"/>
@@ -114,6 +122,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="642" y="118"/>
+        </scene>
+        <!--Font Picker View Controller-->
+        <scene sceneID="6bb-3v-Vlg">
+            <objects>
+                <viewController storyboardIdentifier="FontPickerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kb2-0q-mrm" customClass="FontPickerViewController" customModule="Meme_Me" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qmo-wj-SpF"/>
+                        <viewControllerLayoutGuide type="bottom" id="XIp-hn-lQa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gvW-Rx-UFb">
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kbd-1U-aRC">
+                                <rect key="frame" x="0.0" y="20" width="667" height="44"/>
+                                <items>
+                                    <navigationItem title="Select Font" id="Wqu-bQ-4ew">
+                                        <barButtonItem key="rightBarButtonItem" title="Done" id="ZbL-nk-rMQ">
+                                            <connections>
+                                                <action selector="dismiss:" destination="kb2-0q-mrm" id="v6K-8b-IFF"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XvK-Oc-sty">
+                                <rect key="frame" x="174" y="79" width="320" height="216"/>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kbd-1U-aRC" firstAttribute="leading" secondItem="gvW-Rx-UFb" secondAttribute="leading" id="Czx-wV-7bx"/>
+                            <constraint firstItem="XvK-Oc-sty" firstAttribute="centerX" secondItem="gvW-Rx-UFb" secondAttribute="centerX" id="V3T-wr-a37"/>
+                            <constraint firstAttribute="trailing" secondItem="kbd-1U-aRC" secondAttribute="trailing" id="VKC-kd-fuQ"/>
+                            <constraint firstItem="XvK-Oc-sty" firstAttribute="centerY" secondItem="gvW-Rx-UFb" secondAttribute="centerY" id="YaF-l4-Yhl"/>
+                            <constraint firstItem="kbd-1U-aRC" firstAttribute="top" secondItem="Qmo-wj-SpF" secondAttribute="bottom" id="lOr-It-HEa"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="pickerView" destination="XvK-Oc-sty" id="SL9-qv-QEB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aal-t7-0dU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1413" y="156"/>
         </scene>
     </scenes>
 </document>

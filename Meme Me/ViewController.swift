@@ -11,10 +11,9 @@ import UIKit
 class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     // MARK:  Properties
-    let memeTextAttributes:[String:Any] = [
+    var memeTextAttributes:[String:Any] = [
         NSStrokeColorAttributeName: UIColor.black,
         NSForegroundColorAttributeName: UIColor.white,
-        NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
         NSStrokeWidthAttributeName: NSNumber.init(value: -3.0)]
 
     var memedImage: UIImage?
@@ -59,6 +58,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
+        let memeFont = UIFont(name: UserDefaults.standard.string(forKey: "memeFont") ?? "Impact", size: 40)
+        topTextField.font = memeFont
+        bottomTextField.font = memeFont
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         subscribeToKeyboardNotifications()
         memeShareButton.isEnabled = imagePickerView.image != nil
@@ -92,6 +94,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         }
         imagePicker.allowsEditing = true
         present(imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func chooseFont (_ sender: Any) {
+        
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: "FontPickerViewController") as! FontPickerViewController
+        
+        
+        self.present(controller, animated: true, completion: nil)
+        
     }
     
     // Code for the completionWithItemsHandler in the following method is based upon information found at the following URL
