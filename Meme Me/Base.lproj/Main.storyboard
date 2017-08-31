@@ -210,7 +210,7 @@
         <scene sceneID="Gje-73-XS8">
             <objects>
                 <collectionViewController storyboardIdentifier="SentMemesCollectionViewController" title="Sent Memes" id="HPX-dR-nyl" customClass="SentMemesCollectionViewController" customModule="Meme_Me" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="9OX-fA-9Oa">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="9OX-fA-9Oa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -244,7 +244,7 @@
                             <outlet property="delegate" destination="HPX-dR-nyl" id="xkx-MU-uK5"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="xJw-81-t98">
+                    <navigationItem key="navigationItem" title="Sent Memes" id="xJw-81-t98">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="XxQ-Gz-4hc">
                             <connections>
                                 <action selector="goToMemeEditor:" destination="HPX-dR-nyl" id="QKN-01-fZd"/>
@@ -296,7 +296,7 @@
                             <outlet property="delegate" destination="6V9-dh-TIH" id="r2y-BW-slY"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="fje-gV-pf6">
+                    <navigationItem key="navigationItem" title="Sent Memes" id="fje-gV-pf6">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="XJW-7p-XXw">
                             <connections>
                                 <action selector="goToMemeEditor:" destination="6V9-dh-TIH" id="V3i-cM-h0d"/>
