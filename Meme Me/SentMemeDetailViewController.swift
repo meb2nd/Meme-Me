@@ -26,8 +26,8 @@ class SentMemeDetailViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
+        super.viewWillAppear(animated)
         sentMemeDetailImageView.image = meme.memedImage
     }
 
@@ -36,11 +36,9 @@ class SentMemeDetailViewController: UIViewController {
         // Grab the view controller from Storyboard
         let viewController = self.storyboard!.instantiateViewController(withIdentifier: "MemeEditorViewController") as! MemeEditorViewController
         
-        viewController.bottomTextField.text = meme.bottomText
-        viewController.topTextField.text = meme.topText
-        viewController.imagePickerView.image = meme.originalImage
-        
-        //TODO:  Need to set the font
+        // Send the saved meme to the view controller
+        viewController.savedMeme = meme
+        viewController.memeDetailController = self
         
         // Present the view controller
         present(viewController, animated: true, completion: nil)

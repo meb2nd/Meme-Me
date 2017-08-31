@@ -21,23 +21,22 @@ class SentMemesCollectionViewController: UICollectionViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(SentMemesCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
+        // self.collectionView!.register(SentMemesCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
-        // Get the memes array from the Application Delegate
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
-        self.memes = appDelegate.memes
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        memes = Meme.getSavedMemes()
+        self.collectionView?.reloadData()
     }
 
     @IBAction func goToMemeEditor(_ sender: Any) {
         
         // Grab the view controller from Storyboard
         let viewController = self.storyboard!.instantiateViewController(withIdentifier: "MemeEditorViewController") as! MemeEditorViewController
-        
-        // Ensure editor is reset for a new meme
-        viewController.resetMemeEditor(self)
+
         
         // Present the view controller
         present(viewController, animated: true, completion: nil)

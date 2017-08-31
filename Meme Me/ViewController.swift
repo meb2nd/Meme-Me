@@ -17,6 +17,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         NSStrokeWidthAttributeName: NSNumber.init(value: -3.0)]
 
     var memedImage: UIImage?
+    var savedMeme: Meme?
+    var memeDetailController: SentMemeDetailViewController?
     
     // MARK:  Outlets
     
@@ -37,8 +39,18 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         // Do any additional setup after loading the view, typically from a nib.
         
-        setupTextField(textField: topTextField, text: "TOP")
-        setupTextField(textField: bottomTextField, text: "BOTTOM")
+        if let meme = savedMeme {
+            
+            UserDefaults.standard.set(meme.font, forKey: "memeFont")
+            setupTextField(textField: topTextField, text: meme.topText)
+            setupTextField(textField: bottomTextField, text: meme.bottomText)
+            setUpMemeImageEditor(meme.originalImage)
+            
+        } else {
+            
+            setupTextField(textField: topTextField, text: "TOP")
+            setupTextField(textField: bottomTextField, text: "BOTTOM")
+        }
         
     }
     
@@ -96,7 +108,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         let controller = self.storyboard?.instantiateViewController(withIdentifier: "FontPickerViewController") as! FontPickerViewController
         
-        
+        controller.textFieldsToUpdate = [topTextField, bottomTextField]
         present(controller, animated: true, completion: nil)
         
     }
@@ -116,14 +128,19 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                 if(success && error == nil){
                     // Save copy of meme and close activity view
                     self.saveMeme()
+                    
+                    // If edited a saved meme update the detail view
+                    self.memeDetailController?.meme = Meme.getSavedMemes().last
+                    
                     self.dismiss(animated: true, completion: nil)
+                    
                 } else {
                     
                     let controller = UIAlertController()
                     controller.title = "Meme Share Incomplete"
                     controller.message = "Share was either cancelled or failed."
                     
-                    let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { action in self.dismiss(animated: true, completion: nil)
+                    let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { action in controller.dismiss(animated: true, completion: nil)
                     }
                     
                     controller.addAction(okAction)
@@ -141,10 +158,20 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     @IBAction func resetMemeEditor(_ sender: Any) {
         
-        topTextField?.text = "TOP"
-        bottomTextField?.text = "BOTTOM"
-        imagePickerView?.image = nil
-        memeShareButton?.isEnabled = false
+        if let meme = savedMeme {
+            
+            topTextField.text = meme.topText
+            bottomTextField.text = meme.bottomText
+            imagePickerView.image = meme.originalImage
+            memeShareButton.isEnabled = true
+            
+        } else {
+        
+            topTextField.text = "TOP"
+            bottomTextField.text = "BOTTOM"
+            imagePickerView.image = nil
+            memeShareButton.isEnabled = false
+        }
         
     }
     

@@ -26,6 +26,7 @@ class FontPickerViewController: UIViewController, UIPickerViewDataSource, UIPick
     "HelveticaNeue-CondensedBlack": "Helvetica Neue",
     "Impact": "Impact"]
     
+    var textFieldsToUpdate: [UITextField]?
     
     let pickerDataSource: [String] = Array(allowedFonts.values)
     let fontNames: [String] = Array(allowedFonts.keys)
@@ -75,6 +76,16 @@ class FontPickerViewController: UIViewController, UIPickerViewDataSource, UIPick
     {
         
         UserDefaults.standard.set(fontNames[row], forKey: "memeFont")
+        
+        if let fields = textFieldsToUpdate {
+            
+            let font = UIFont(name: fontNames[row], size: 40)
+            
+            for field in fields {
+                
+                field.font = font
+            }
+        }
 
     }
     
