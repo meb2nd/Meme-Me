@@ -31,6 +31,17 @@ class SentMemesCollectionViewController: UICollectionViewController {
         self.memes = appDelegate.memes
     }
 
+    @IBAction func goToMemeEditor(_ sender: Any) {
+        
+        // Grab the view controller from Storyboard
+        let viewController = self.storyboard!.instantiateViewController(withIdentifier: "MemeEditorViewController") as! MemeEditorViewController
+        
+        // Ensure editor is reset for a new meme
+        viewController.resetMemeEditor(self)
+        
+        // Present the view controller
+        present(viewController, animated: true, completion: nil)
+    }
 
     /*
     // MARK: - Navigation

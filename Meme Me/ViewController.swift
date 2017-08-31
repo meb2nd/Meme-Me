@@ -133,6 +133,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             }
             
             present(controller, animated: true, completion: nil)
+
         }
         
     }
@@ -140,10 +141,17 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     @IBAction func resetMemeEditor(_ sender: Any) {
         
-        topTextField.text = "TOP"
-        bottomTextField.text = "BOTTOM"
-        imagePickerView.image = nil
-        memeShareButton.isEnabled = false
+        topTextField?.text = "TOP"
+        bottomTextField?.text = "BOTTOM"
+        imagePickerView?.image = nil
+        memeShareButton?.isEnabled = false
+        
+    }
+    
+    @IBAction func cancel(_ sender: Any) {
+        
+        resetMemeEditor(sender)
+        dismiss(animated: true, completion: nil)
         
     }
     

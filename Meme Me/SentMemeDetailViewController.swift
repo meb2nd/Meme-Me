@@ -31,5 +31,20 @@ class SentMemeDetailViewController: UIViewController {
         sentMemeDetailImageView.image = meme.memedImage
     }
 
+    @IBAction func goToMemeEditor(_ sender: Any) {
+        
+        // Grab the view controller from Storyboard
+        let viewController = self.storyboard!.instantiateViewController(withIdentifier: "MemeEditorViewController") as! MemeEditorViewController
+        
+        viewController.bottomTextField.text = meme.bottomText
+        viewController.topTextField.text = meme.topText
+        viewController.imagePickerView.image = meme.originalImage
+        
+        //TODO:  Need to set the font
+        
+        // Present the view controller
+        present(viewController, animated: true, completion: nil)
+        
+    }
 
 }

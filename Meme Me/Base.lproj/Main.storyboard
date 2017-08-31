@@ -66,7 +66,7 @@
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="LvT-Xm-MrK">
                                             <connections>
-                                                <action selector="resetMemeEditor:" destination="BYZ-38-t0r" id="1yO-AJ-bUB"/>
+                                                <action selector="cancel:" destination="BYZ-38-t0r" id="huV-cA-pgB"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -149,6 +149,9 @@
                                     <constraint firstAttribute="height" constant="30" id="x6V-wR-5zm"/>
                                 </constraints>
                                 <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="goToMemeEditor:" destination="YJI-6V-CkD" eventType="touchUpInside" id="Hcd-kB-sDG"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -241,7 +244,13 @@
                             <outlet property="delegate" destination="HPX-dR-nyl" id="xkx-MU-uK5"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="xJw-81-t98"/>
+                    <navigationItem key="navigationItem" id="xJw-81-t98">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="XxQ-Gz-4hc">
+                            <connections>
+                                <action selector="goToMemeEditor:" destination="HPX-dR-nyl" id="QKN-01-fZd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oz9-cM-lCl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -287,7 +296,13 @@
                             <outlet property="delegate" destination="6V9-dh-TIH" id="r2y-BW-slY"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="fje-gV-pf6"/>
+                    <navigationItem key="navigationItem" id="fje-gV-pf6">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="XJW-7p-XXw">
+                            <connections>
+                                <action selector="goToMemeEditor:" destination="6V9-dh-TIH" id="V3i-cM-h0d"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vqv-d0-sf8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

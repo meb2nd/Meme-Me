@@ -21,11 +21,27 @@ class SentMemesTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        // Get the memes array from the Application Delegate
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        self.memes = appDelegate.memes
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    @IBAction func goToMemeEditor(_ sender: Any) {
+        
+        // Grab the view controller from Storyboard
+        let viewController = self.storyboard!.instantiateViewController(withIdentifier: "MemeEditorViewController") as! MemeEditorViewController
+        
+        // Ensure editor is reset for a new meme
+        viewController.resetMemeEditor(self)
+        
+        // Present the view controller
+        present(viewController, animated: true, completion: nil)
     }
 
     // MARK: - Table view data source
