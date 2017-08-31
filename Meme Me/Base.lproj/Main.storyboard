@@ -142,27 +142,22 @@
                                     <constraint firstAttribute="width" constant="343" id="tHy-sW-HEn"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dpw-1N-Y3o" userLabel="Edit">
-                                <rect key="frame" x="164.5" y="463.5" width="46" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="JiN-q6-0ld"/>
-                                    <constraint firstAttribute="height" constant="30" id="x6V-wR-5zm"/>
-                                </constraints>
-                                <state key="normal" title="Edit"/>
-                                <connections>
-                                    <action selector="goToMemeEditor:" destination="YJI-6V-CkD" eventType="touchUpInside" id="Hcd-kB-sDG"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="dpw-1N-Y3o" firstAttribute="top" secondItem="9SZ-lI-eM2" secondAttribute="bottom" constant="10" id="4ub-Pl-vgp"/>
-                            <constraint firstItem="dpw-1N-Y3o" firstAttribute="centerX" secondItem="e8T-RH-c2g" secondAttribute="centerX" id="Pyw-CO-2wK"/>
                             <constraint firstItem="9SZ-lI-eM2" firstAttribute="centerX" secondItem="e8T-RH-c2g" secondAttribute="centerX" id="Tgz-C7-gbF"/>
-                            <constraint firstItem="dpw-1N-Y3o" firstAttribute="top" secondItem="9SZ-lI-eM2" secondAttribute="bottom" constant="10" id="ZHn-fd-fa4"/>
                             <constraint firstItem="9SZ-lI-eM2" firstAttribute="centerY" secondItem="e8T-RH-c2g" secondAttribute="centerY" id="rbD-JJ-9x1"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="eeK-yL-UrY">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="gjc-it-wRa">
+                            <connections>
+                                <action selector="goToMemeEditor:" destination="YJI-6V-CkD" id="jgp-QH-J22"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="sentMemeDetailImageView" destination="9SZ-lI-eM2" id="HYf-v8-F7A"/>
                     </connections>
@@ -210,7 +205,7 @@
         <scene sceneID="Gje-73-XS8">
             <objects>
                 <collectionViewController storyboardIdentifier="SentMemesCollectionViewController" title="Sent Memes" id="HPX-dR-nyl" customClass="SentMemesCollectionViewController" customModule="Meme_Me" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="9OX-fA-9Oa">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="9OX-fA-9Oa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
