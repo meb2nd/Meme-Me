@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class MemeEditorViewController: UIViewController, UINavigationControllerDelegate {
     
     // MARK:  Properties
     var memeTextAttributes:[String:Any] = [
@@ -194,51 +194,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     
-    // MARK: Image Picker Controller Delegate Methods
-
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
-        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
-            
-            setUpMemeImageEditor(image)
-            
-        } else if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            
-            setUpMemeImageEditor(image)
-        }
-        
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func setUpMemeImageEditor(_ image: UIImage) {
-        imagePickerView.image = image
-        memeShareButton.isEnabled = true
-    }
-    
-    // MARK: Text Field Delegate Methods
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        
-        let currentText = textField.text
-        
-        if currentText == "TOP" || currentText == "BOTTOM" {
-            
-            textField.text = ""
-        }
-        
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        textField.resignFirstResponder()
-        restoreButton.isEnabled = shouldEnableRestore()
-        return true
-    }
     
     // MARK:  Helper methods for keyboard handling
     
@@ -283,20 +238,29 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // MARK: Meme Image Handling
     
     func saveMeme() {
-        // Save the meme
-        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imagePickerView.image!, memedImage: memedImage!, font: (topTextField.font?.fontName)!)
         
-        // Add it to the memes array in the Application Delegate
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
-        appDelegate.memes.append(meme)
+        // Save the meme
+        if let topText = topTextField.text,
+            let bottomText = bottomTextField.text,
+            let originalImage = imagePickerView.image,
+            let memedImage = memedImage,
+            let font = topTextField.font?.fontName {
+            
+            let meme = Meme(topText: topText, bottomText: bottomText, originalImage: originalImage, memedImage: memedImage, font: font)
+            
+            // Add it to the memes array in the Application Delegate
+            let object = UIApplication.shared.delegate
+            let appDelegate = object as! AppDelegate
+            appDelegate.memes.append(meme)
+        }
+        
+        
     }
     
     func generateMemedImage() -> UIImage {
         
         // Hide tool bar and navigation bar
-        toolBar.isHidden = true
-        navigationBar.isHidden = true
+        memeEditorControlBars(areHidden: true)
         
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
@@ -305,14 +269,72 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         UIGraphicsEndImageContext()
         
         // Show tool bar and navigation bar
-        toolBar.isHidden = false
-        navigationBar.isHidden = false
+        memeEditorControlBars(areHidden: false)
         
         return memedImage
     }
     
-    
+    func memeEditorControlBars(areHidden isHidden: Bool) {
+        
+        toolBar.isHidden = isHidden
+        navigationBar.isHidden = isHidden
+    }
     
 
 }
+
+
+// MARK: - UIImagePickerControllerDelegate
+extension MemeEditorViewController: UIImagePickerControllerDelegate {
+
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            
+            setUpMemeImageEditor(image)
+            
+        } else if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            
+            setUpMemeImageEditor(image)
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func setUpMemeImageEditor(_ image: UIImage) {
+        imagePickerView.image = image
+        memeShareButton.isEnabled = true
+    }
+}
+
+
+// MARK: Text Field Delegate Methods
+extension MemeEditorViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        let currentText = textField.text
+        
+        if currentText == "TOP" || currentText == "BOTTOM" {
+            
+            textField.text = ""
+        }
+        
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        restoreButton.isEnabled = shouldEnableRestore()
+        return true
+    }
+}
+
+
 
