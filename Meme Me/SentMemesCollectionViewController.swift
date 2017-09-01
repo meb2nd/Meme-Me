@@ -67,11 +67,8 @@ class SentMemesCollectionViewController: UICollectionViewController {
 
     @IBAction func goToMemeEditor(_ sender: Any) {
         
-        // Grab the view controller from Storyboard
         let viewController = self.storyboard!.instantiateViewController(withIdentifier: "MemeEditorViewController") as! MemeEditorViewController
 
-        
-        // Present the view controller
         present(viewController, animated: true, completion: nil)
     }
 

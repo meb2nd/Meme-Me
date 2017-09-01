@@ -13,4 +13,10 @@ class SentMemesCollectionViewCell: UICollectionViewCell {
     // MARK: Outlets
     
     @IBOutlet weak var sentMemeImageView: UIImageView!
+    
+    // Mark: Methods
+    func setupCellWith(meme:Meme) {
+        
+        //setup labels and image based on the meme from the parameter
+    }
 }

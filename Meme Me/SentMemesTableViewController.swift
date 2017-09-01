@@ -33,10 +33,8 @@ class SentMemesTableViewController: UITableViewController {
     
     @IBAction func goToMemeEditor(_ sender: Any) {
         
-        // Grab the view controller from Storyboard
         let viewController = self.storyboard!.instantiateViewController(withIdentifier: "MemeEditorViewController") as! MemeEditorViewController
         
-        // Present the view controller
         present(viewController, animated: true, completion: nil)
     }
     
@@ -71,9 +69,8 @@ class SentMemesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SentMemesTableViewCell", for: indexPath)
-
-        cell.textLabel?.text = memes[indexPath.row].topText + " " + memes[indexPath.row].bottomText
-        cell.imageView?.image = memes[indexPath.row].memedImage
+        
+        cell.setupCellWith(meme: memes[indexPath.row])
 
         return cell
     }
@@ -125,4 +122,15 @@ class SentMemesTableViewController: UITableViewController {
         deleteMemeIndexPath = nil
     }
 
+}
+
+
+//MARK:  UITableViewCell
+extension UITableViewCell {
+    
+    func setupCellWith(meme:Meme) {
+        
+        textLabel?.text = meme.topText + " " + meme.bottomText
+        imageView?.image = meme.memedImage
+    }
 }
