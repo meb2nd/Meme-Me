@@ -253,6 +253,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="sentMemesCollectionViewFlowLayout" destination="6Sv-i6-bXf" id="nOV-Te-YaO"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oz9-cM-lCl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

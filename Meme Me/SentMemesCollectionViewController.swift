@@ -13,6 +13,10 @@ private let reuseIdentifier = "SentMemesCollectionViewCell"
 class SentMemesCollectionViewController: UICollectionViewController {
     
     var memes: [Meme]!
+    
+    
+    @IBOutlet weak var sentMemesCollectionViewFlowLayout: UICollectionViewFlowLayout!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +27,30 @@ class SentMemesCollectionViewController: UICollectionViewController {
         // Register cell classes
         // self.collectionView!.register(SentMemesCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
+    }
+    
+    func setupLayout() {
+        
+        let space:CGFloat = 3.0
+        let dimension = (view.frame.size.width - (2 * space)) / 3.0
+        
+        sentMemesCollectionViewFlowLayout.minimumInteritemSpacing = space
+        sentMemesCollectionViewFlowLayout.minimumLineSpacing = space
+        sentMemesCollectionViewFlowLayout.itemSize = CGSize(width: dimension, height: dimension)
+        
+    }
+    
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if ((self.traitCollection.verticalSizeClass != previousTraitCollection?.verticalSizeClass)
+            || (self.traitCollection.horizontalSizeClass != previousTraitCollection?.horizontalSizeClass)) {
+            
+            setupLayout()
+            
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
