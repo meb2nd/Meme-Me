@@ -230,12 +230,17 @@
                                     <rect key="frame" x="0.0" y="0.0" width="159" height="155"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OtF-Iu-05G">
-                                            <rect key="frame" x="-53" y="-12" width="240" height="128"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OtF-Iu-05G">
+                                            <rect key="frame" x="0.0" y="0.0" width="159" height="155"/>
                                         </imageView>
                                     </subviews>
                                 </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="OtF-Iu-05G" secondAttribute="trailing" id="ReZ-dD-cXt"/>
+                                    <constraint firstAttribute="bottom" secondItem="OtF-Iu-05G" secondAttribute="bottom" id="beB-Eu-AFE"/>
+                                    <constraint firstItem="OtF-Iu-05G" firstAttribute="top" secondItem="NhV-KV-2gq" secondAttribute="top" id="h3l-Py-xXH"/>
+                                    <constraint firstItem="OtF-Iu-05G" firstAttribute="leading" secondItem="NhV-KV-2gq" secondAttribute="leading" id="sdW-zl-i5X"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="sentMemeImageView" destination="OtF-Iu-05G" id="JPj-cC-vfG"/>
                                 </connections>
