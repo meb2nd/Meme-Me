@@ -29,6 +29,15 @@ class SentMemesCollectionViewController: UICollectionViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        memes = Meme.getSavedMemes()
+        self.collectionView?.reloadData()
+    }
+    
+    // MARK:  Layout handling
+    
     func setupLayout() {
         
         let space:CGFloat = 3.0
@@ -53,12 +62,6 @@ class SentMemesCollectionViewController: UICollectionViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-        super.viewWillAppear(animated)
-        memes = Meme.getSavedMemes()
-        self.collectionView?.reloadData()
-    }
     
     // MARK: Actions
 
