@@ -14,14 +14,10 @@ class SentMemesTableViewController: UITableViewController {
     var memes: [Meme]!
     var deleteMemeIndexPath: IndexPath? = nil
     
+    // MARK: Life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
     }
 
@@ -32,6 +28,8 @@ class SentMemesTableViewController: UITableViewController {
         memes = Meme.getSavedMemes()
         self.tableView.reloadData()
     }
+    
+    // MARK: Actions
     
     @IBAction func goToMemeEditor(_ sender: Any) {
         
@@ -87,7 +85,6 @@ class SentMemesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             deleteMemeIndexPath = indexPath
-            let memeToDelete = Meme.getMemeAtIndex(indexPath.row)
             confirmDelete()
         }
     }
@@ -112,11 +109,10 @@ class SentMemesTableViewController: UITableViewController {
         if let indexPath = deleteMemeIndexPath {
             tableView.beginUpdates()
             
-            Meme.removeAtIndex(indexPath.row)
+            Meme.removeAtIndex(indexPath.row) // Update application data store
             
-            memes = Meme.getSavedMemes()
-            
-            // Note that indexPath is wrapped in an array:  [indexPath]
+            memes = Meme.getSavedMemes() // Refresh local array
+
             tableView.deleteRows(at: [indexPath], with: .automatic)
             
             deleteMemeIndexPath = nil

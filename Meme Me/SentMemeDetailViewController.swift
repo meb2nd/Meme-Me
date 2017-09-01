@@ -11,9 +11,11 @@ import UIKit
 class SentMemeDetailViewController: UIViewController {
 
     // MARK: Properties
+    
     var meme: Meme!
     
     // MARK: Outlets
+    
     @IBOutlet weak var sentMemeDetailImageView: UIImageView!
     
     // MARK:Life cycle
@@ -21,8 +23,6 @@ class SentMemeDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,6 +30,8 @@ class SentMemeDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         sentMemeDetailImageView.image = meme.memedImage
     }
+    
+    // MARK: Actions
 
     @IBAction func goToMemeEditor(_ sender: Any) {
         
