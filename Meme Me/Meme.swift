@@ -18,48 +18,37 @@ struct Meme {
     var font: String
     
     // Conveneince method to save a meme
-    func addToSavedMemes(meme: Meme) {
+    static func addToSavedMemes(meme: Meme) {
 
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.memes.append(meme)
     }
     
-    // Convenience method to get immutable copy of the saved memes
+    // Convenience method to get copy of the saved memes
     static func getSavedMemes() -> [Meme] {
+        
         return (UIApplication.shared.delegate as! AppDelegate).memes
     }
     
     // Conveneince method to remove meme from saved collection
-    func removeFromSavedMemes(meme: Meme) {
-        
-        /*
-         
-         Here is how to compare images
-         
-         let image1 = UIImage(named: "MyImage")
-         let image2 = UIImage(named: "MyImage")
-         if image1 != nil && image1!.isEqual(image2) {
-         // Correct. This technique compares the image data correctly.
-         }
- 
- 
-         This is the way to create a custom compare function
-         
-         infix operator <==> { precedence 130 }
-         func <==> (lhs: CGPoint, rhs: CGPoint) -> Bool {
-         return lhs.x == rhs.x && lhs.y == rhs.y
-         }
-         
-         let point1 = CGPoint(x: 1.0, y: 1.0)
-         let point2 = CGPoint(x: 1.0, y: 1.0)
-         point1 <==> point2 // true
- 
- 
-         */
-        
+    static func removeAtIndex(_ index: Int) {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.memes.append(meme)
+        let memes = appDelegate.memes
+        
+        if memes.indices.contains(index) {
+            appDelegate.memes.remove(at: index)
+        }
+        
+    }
+    
+    // Conveneince method to retrieve meme from saved collection
+    static func getMemeAtIndex(_ index: Int) -> Meme? {
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let memes = appDelegate.memes
+        
+        return memes.indices.contains(index) ? memes[index] : nil
     }
     
 }

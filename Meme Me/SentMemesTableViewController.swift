@@ -12,6 +12,7 @@ class SentMemesTableViewController: UITableViewController {
 
     // MARK: Properties
     var memes: [Meme]!
+    var deleteMemeIndexPath: IndexPath? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,22 @@ class SentMemesTableViewController: UITableViewController {
         // Present the view controller
         present(viewController, animated: true, completion: nil)
     }
+    
+    
+    // Mark: Table view delegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // Grab the DetailVC from Storyboard
+        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "SentMemeDetailViewController") as! SentMemeDetailViewController
+        
+        //Populate view controller with data from the selected item
+        detailController.meme = memes[indexPath.row]
+        
+        // Present the view controller using navigation
+        navigationController!.pushViewController(detailController, animated: true)
+    }
+    
 
     // MARK: - Table view data source
 
@@ -62,20 +79,54 @@ class SentMemesTableViewController: UITableViewController {
 
         return cell
     }
-    
-    // Mark: Table view delegate
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        // Grab the DetailVC from Storyboard
-        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "SentMemeDetailViewController") as! SentMemeDetailViewController
-        
-        //Populate view controller with data from the selected item
-        detailController.meme = memes[indexPath.row]
-        
-        // Present the view controller using navigation
-        navigationController!.pushViewController(detailController, animated: true)
-    }
 
+
+    // The code for the delete functionality is based on information found at the following URL:
+    // https://www.andrewcbancroft.com/2015/07/16/uitableview-swipe-to-delete-workflow-in-swift/
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            deleteMemeIndexPath = indexPath
+            let memeToDelete = Meme.getMemeAtIndex(indexPath.row)
+            confirmDelete()
+        }
+    }
+    
+    func confirmDelete() {
+        let alert = UIAlertController(title: "Delete Meme", message: "Are you sure you want to permanently delete this meme?", preferredStyle: .actionSheet)
+        
+        let DeleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: handleDeleteMeme)
+        let CancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelDeleteMeme)
+        
+        alert.addAction(DeleteAction)
+        alert.addAction(CancelAction)
+        
+        // Support display in iPad
+        alert.popoverPresentationController?.sourceView = view
+        alert.popoverPresentationController?.sourceRect = CGRect(x: view.bounds.size.width / 2.0, y: view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func handleDeleteMeme(alertAction: UIAlertAction!) -> Void {
+        if let indexPath = deleteMemeIndexPath {
+            tableView.beginUpdates()
+            
+            Meme.removeAtIndex(indexPath.row)
+            
+            memes = Meme.getSavedMemes()
+            
+            // Note that indexPath is wrapped in an array:  [indexPath]
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            deleteMemeIndexPath = nil
+            
+            tableView.endUpdates()
+        }
+    }
+    
+    func cancelDeleteMeme(alertAction: UIAlertAction!) {
+        deleteMemeIndexPath = nil
+    }
 
 }
