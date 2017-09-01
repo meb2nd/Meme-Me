@@ -143,17 +143,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9SZ-lI-eM2">
-                                <rect key="frame" x="16" y="213.5" width="343" height="240"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="240" id="JiE-2b-RDh"/>
-                                    <constraint firstAttribute="width" constant="343" id="tHy-sW-HEn"/>
-                                </constraints>
+                                <rect key="frame" x="16" y="28" width="343" height="595"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="5Iy-8O-WFz" firstAttribute="top" secondItem="9SZ-lI-eM2" secondAttribute="bottom" id="Hg2-YT-zuc"/>
                             <constraint firstItem="9SZ-lI-eM2" firstAttribute="centerX" secondItem="e8T-RH-c2g" secondAttribute="centerX" id="Tgz-C7-gbF"/>
-                            <constraint firstItem="9SZ-lI-eM2" firstAttribute="centerY" secondItem="e8T-RH-c2g" secondAttribute="centerY" id="rbD-JJ-9x1"/>
+                            <constraint firstItem="9SZ-lI-eM2" firstAttribute="top" secondItem="5pb-JI-lP4" secondAttribute="bottom" constant="8" symbolic="YES" id="UeL-tM-3ya"/>
+                            <constraint firstItem="9SZ-lI-eM2" firstAttribute="trailing" secondItem="e8T-RH-c2g" secondAttribute="trailingMargin" id="YzK-zP-Siu"/>
+                            <constraint firstItem="9SZ-lI-eM2" firstAttribute="leading" secondItem="e8T-RH-c2g" secondAttribute="leadingMargin" id="yvG-2V-NUK"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
