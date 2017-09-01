@@ -32,7 +32,7 @@ class SentMemesCollectionViewController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        memes = Meme.getSavedMemes()
+        memes = Memes.getSavedMemes()
         self.collectionView?.reloadData()
     }
     

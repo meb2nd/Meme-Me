@@ -25,7 +25,7 @@ class SentMemesTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        memes = Meme.getSavedMemes()
+        memes = Memes.getSavedMemes()
         self.tableView.reloadData()
     }
     
@@ -106,9 +106,9 @@ class SentMemesTableViewController: UITableViewController {
         if let indexPath = deleteMemeIndexPath {
             tableView.beginUpdates()
             
-            Meme.removeAtIndex(indexPath.row) // Update application data store
+            Memes.removeAtIndex(indexPath.row) // Update application data store
             
-            memes = Meme.getSavedMemes() // Refresh local array
+            memes = Memes.getSavedMemes() // Refresh local array
 
             tableView.deleteRows(at: [indexPath], with: .automatic)
             

@@ -140,7 +140,7 @@ class MemeEditorViewController: UIViewController, UINavigationControllerDelegate
                     self.saveMeme()
                     
                     // If edited a saved meme update the detail view
-                    self.memeDetailController?.meme = Meme.getSavedMemes().last
+                    self.memeDetailController?.meme = Memes.getSavedMemes().last
                     
                     self.dismiss(animated: true, completion: nil)
                     
