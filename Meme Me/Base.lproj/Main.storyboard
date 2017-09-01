@@ -52,6 +52,12 @@
                                             <action selector="pickAnImageFromAlbum:" destination="BYZ-38-t0r" id="hG6-4M-wMi"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="xVv-Ym-1RZ"/>
+                                    <barButtonItem title="Restore" id="yqw-3X-hhJ">
+                                        <connections>
+                                            <action selector="resetMemeEditor:" destination="BYZ-38-t0r" id="aGv-gr-hHx"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="o8i-m7-DLk"/>
                                 </items>
                             </toolbar>
@@ -115,6 +121,7 @@
                         <outlet property="imagePickerView" destination="Xmi-k3-SWh" id="C13-Ig-S5T"/>
                         <outlet property="memeShareButton" destination="BIA-wE-btr" id="uGe-pY-bgQ"/>
                         <outlet property="navigationBar" destination="sG8-Jg-9iS" id="XG1-2e-qZz"/>
+                        <outlet property="restoreButton" destination="yqw-3X-hhJ" id="54j-ey-5wc"/>
                         <outlet property="toolBar" destination="PTT-aX-af7" id="enA-v4-Ca7"/>
                         <outlet property="topTextField" destination="NRu-7c-4Fy" id="wNb-Qb-g8h"/>
                     </connections>

@@ -29,7 +29,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var memeShareButton: UIBarButtonItem!
-    
+    @IBOutlet weak var restoreButton: UIBarButtonItem!
     
     // MARK: Life Cycle
     
@@ -72,6 +72,16 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         subscribeToKeyboardNotifications()
         memeShareButton.isEnabled = imagePickerView.image != nil
+        restoreButton.isEnabled = shouldEnableRestore()
+    }
+    
+    func shouldEnableRestore() -> Bool {
+        
+        if let savedMeme = self.savedMeme {
+            return !savedMeme.originalImage.isEqual(imagePickerView.image) || topTextField.text != savedMeme.topText || bottomTextField.text != savedMeme.bottomText
+        } else {
+            return imagePickerView.image != nil || topTextField.text != "TOP" || bottomTextField.text != "BOTTOM"
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -173,11 +183,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             memeShareButton.isEnabled = false
         }
         
+        restoreButton.isEnabled = false
+        
     }
     
     @IBAction func cancel(_ sender: Any) {
         
-        resetMemeEditor(sender)
         dismiss(animated: true, completion: nil)
         
     }
@@ -225,6 +236,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
+        restoreButton.isEnabled = shouldEnableRestore()
         return true
     }
     
@@ -299,7 +311,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         return memedImage
     }
     
-
     
     
 
