@@ -30,6 +30,7 @@ class MemeEditorViewController: UIViewController, UINavigationControllerDelegate
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var memeShareButton: UIBarButtonItem!
     @IBOutlet weak var restoreButton: UIBarButtonItem!
+    override var prefersStatusBarHidden: Bool{return true}
     
     // MARK: Life Cycle
     
@@ -110,7 +111,7 @@ class MemeEditorViewController: UIViewController, UINavigationControllerDelegate
         if sourceType == .camera {
            imagePicker.cameraCaptureMode = .photo
         }
-        imagePicker.allowsEditing = true
+        //imagePicker.allowsEditing = true
         present(imagePicker, animated: true, completion: nil)
     }
     
