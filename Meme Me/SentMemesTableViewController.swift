@@ -79,7 +79,7 @@ class SentMemesTableViewController: UITableViewController {
     // The code for the delete functionality is based on information found at the following URL:
     // https://www.andrewcbancroft.com/2015/07/16/uitableview-swipe-to-delete-workflow-in-swift/
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             deleteMemeIndexPath = indexPath
             confirmDelete()

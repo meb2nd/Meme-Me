@@ -12,9 +12,9 @@ class MemeEditorViewController: UIViewController, UINavigationControllerDelegate
     
     // MARK:  Properties
     var memeTextAttributes:[String:Any] = [
-        NSStrokeColorAttributeName: UIColor.black,
-        NSForegroundColorAttributeName: UIColor.white,
-        NSStrokeWidthAttributeName: NSNumber.init(value: -3.0)]
+        convertFromNSAttributedStringKey(NSAttributedString.Key.strokeColor): UIColor.black,
+        convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor): UIColor.white,
+        convertFromNSAttributedStringKey(NSAttributedString.Key.strokeWidth): NSNumber.init(value: -3.0)]
 
     var memedImage: UIImage?
     var savedMeme: Meme?
@@ -57,7 +57,7 @@ class MemeEditorViewController: UIViewController, UINavigationControllerDelegate
     
     func setupTextField(textField: UITextField, text: String) {
         
-        textField.defaultTextAttributes = memeTextAttributes
+        textField.defaultTextAttributes = convertToNSAttributedStringKeyDictionary(memeTextAttributes)
         textField.text = text
         textField.textAlignment = .center
         textField.delegate = self
@@ -103,7 +103,7 @@ class MemeEditorViewController: UIViewController, UINavigationControllerDelegate
         setUpImagePicker (sourceType: .camera)
     }
     
-    func setUpImagePicker (sourceType: UIImagePickerControllerSourceType) {
+    func setUpImagePicker (sourceType: UIImagePickerController.SourceType) {
         
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -151,7 +151,7 @@ class MemeEditorViewController: UIViewController, UINavigationControllerDelegate
                     controller.title = "Meme Share Incomplete"
                     controller.message = "Share was either cancelled or failed."
                     
-                    let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { action in controller.dismiss(animated: true, completion: nil)
+                    let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { action in controller.dismiss(animated: true, completion: nil)
                     }
                     
                     controller.addAction(okAction)
@@ -198,12 +198,12 @@ class MemeEditorViewController: UIViewController, UINavigationControllerDelegate
     
     // MARK:  Helper methods for keyboard handling
     
-    func keyboardWillShow(_ notification:Notification) {
+    @objc func keyboardWillShow(_ notification:Notification) {
 
         view.frame.origin.y = 0 - getKeyboardHeight(notification)
     }
     
-    func keyboardWillHide(_ notification:Notification) {
+    @objc func keyboardWillHide(_ notification:Notification) {
         
         view.frame.origin.y = 0
     }
@@ -211,7 +211,7 @@ class MemeEditorViewController: UIViewController, UINavigationControllerDelegate
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
         
         let userInfo = notification.userInfo
-        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
+        let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         
         // Only move the view when editing the bottom text
         if bottomTextField.isFirstResponder {
@@ -224,14 +224,14 @@ class MemeEditorViewController: UIViewController, UINavigationControllerDelegate
     
     func subscribeToKeyboardNotifications() {
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     func unsubscribeFromKeyboardNotifications() {
         
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     
@@ -294,13 +294,16 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate {
         dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         
-        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+        if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage {
             
             setUpMemeImageEditor(image)
             
-        } else if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        } else if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
             
             setUpMemeImageEditor(image)
         }
@@ -339,3 +342,23 @@ extension MemeEditorViewController: UITextFieldDelegate {
 
 
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToNSAttributedStringKeyDictionary(_ input: [String: Any]) -> [NSAttributedString.Key: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
+}
