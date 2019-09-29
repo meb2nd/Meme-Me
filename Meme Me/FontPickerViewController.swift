@@ -46,7 +46,7 @@ class FontPickerViewController: UIViewController, UIPickerViewDataSource, UIPick
         self.pickerView.dataSource = self;
         self.pickerView.delegate = self;
         
-        if let row = fontNames.index(of: selected) {
+        if let row = fontNames.firstIndex(of: selected) {
             pickerView.selectRow(row, inComponent: 0, animated: false)
         }
         
